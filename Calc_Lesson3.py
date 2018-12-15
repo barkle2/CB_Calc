@@ -2,18 +2,39 @@
 import tkinter as tk
 # Decimal 라이브러리 호출
 import decimal as dc
+# Time 라이브러리 호출
+import time
+
 
 # 버튼 클릭시 실행 함수
 def button_click(key):
     # '=' 버튼을 누른 경우
     if key == '=':
-        # display_entry 수식을 계산하고 결과값 출력
-        result = str(round(eval(display_entry.get()),2))
-        display_entry.insert(tk.END, '=' + result)
+        try:
+            # display_entry 수식을 계산하고 결과값 출력
+            result = str(round(eval(display_entry.get()), 2))
+            display_entry.insert(tk.END, '=' + result)
+        # 계산이 되지 않는 수식인 경우 1초 동안 '오류' 표시
+        except:
+            # 현재 display_entry 수식을 임시로 저장
+            result_tmp = display_entry.get()
+            # display_entry 내용 지우기
+            display_entry.delete(0, tk.END)
+            # 안내 메시지 표출
+            display_entry.insert(0, "계산할 수 없는 수식입니다")
+            display_entry.update()
+            # 1초간 정지
+            time.sleep(1)
+            # display_entry 내용 지우기
+            display_entry.delete(0, tk.END)
+            # 임시로 저장해두었던 수식 다시 보여주기
+            display_entry.insert(0, result_tmp)
+
     # '=' 외의 버튼을 누른 경우
     else:
         # 눌러진 버튼 텍스트 값을 디스플레이에 추가
         display_entry.insert(tk.END, key)
+
 
 # 메인 윈도우 생성
 main_win = tk.Tk()
@@ -47,6 +68,7 @@ for num_text in num_list:
         # num_text 값을 넘겨주면서 button_click을 호출
         button_click(key_input)
 
+
     # Button을 생성하고, row_tmp, col_tmp 위치에 배치
     num_button = tk.Button(num_frame, text=num_text, width=5, command=cmd_tmp)
     num_button.grid(row=row_tmp, column=col_tmp)
@@ -79,6 +101,7 @@ for op_text in op_list:
     def cmd_tmp(key_input=op_text):
         # op_text 값을 넘겨주면서 button_click을 호출
         button_click(key_input)
+
 
     # Button을 생성하고, row_tmp, col_tmp 위치에 배치
     op_button = tk.Button(op_frame, text=op_text, width=5, command=cmd_tmp)
