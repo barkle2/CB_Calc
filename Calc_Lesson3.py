@@ -1,7 +1,5 @@
 # Tkinter 라이브러리 호출
 import tkinter as tk
-# Decimal 라이브러리 호출
-import decimal as dc
 # Time 라이브러리 호출
 import time
 
@@ -41,7 +39,7 @@ def inputKey(key):
             # display_entry 내용 지우기
             display_entry.delete(0, tk.END)
             # display_entry에 결과값 출력
-            display_entry.insert(tk.END, '=' + result)
+            display_entry.insert(tk.END, result)
         # 계산이 되지 않는 수식인 경우 1초 동안 '오류' 표시
         except:
             # 현재 display_entry 수식을 임시로 저장
@@ -82,7 +80,7 @@ def buttonClick(key):
             # display_entry 내용 지우기
             display_entry.delete(0, tk.END)
             # display_entry에 결과값 출력
-            display_entry.insert(tk.END, '=' + result)
+            display_entry.insert(tk.END, result)
         # 계산이 되지 않는 수식인 경우 1초 동안 '오류' 표시
         except:
             # 현재 display_entry 수식을 임시로 저장
@@ -141,7 +139,6 @@ for num_text in num_list:
         # num_text 값을 넘겨주면서 button_click을 호출
         buttonClick(key_input)
 
-
     # Button을 생성하고, row_tmp, col_tmp 위치에 배치
     num_button = tk.Button(num_frame, text=num_text, width=5, command=cmd_tmp)
     num_button.grid(row=row_tmp, column=col_tmp)
@@ -168,7 +165,6 @@ for op_text in op_list:
     def cmd_tmp(key_input=op_text):
         # op_text 값을 넘겨주면서 button_click을 호출
         buttonClick(key_input)
-
 
     # Button을 생성하고, row_tmp, col_tmp 위치에 배치
     op_button = tk.Button(op_frame, text=op_text, width=5, command=cmd_tmp)

@@ -1,7 +1,5 @@
 # Tkinter 라이브러리 호출
 import tkinter as tk
-# Decimal 라이브러리 호출
-import decimal as dc
 
 # 버튼 클릭시 실행 함수
 def button_click(key):
@@ -10,7 +8,15 @@ def button_click(key):
         # display_entry 수식을 계산하고 결과값 출력
         result = str(round(eval(display_entry.get()),2))
         display_entry.insert(tk.END, '=' + result)
-    # '=' 외의 버튼을 누른 경우
+    # 'C' 버튼을 누른 경우
+    elif key == 'C':
+        # display_entry 내용 삭제
+        display_entry.delete(0, tk.END)
+    # 'AC' 버튼을 누른 경우
+    elif key == 'AC':
+        # display_entry 내용 삭제
+        display_entry.delete(0, tk.END)
+    # '=', 'C', 'AC' 외의 버튼을 누른 경우
     else:
         # 눌러진 버튼 텍스트 값을 디스플레이에 추가
         display_entry.insert(tk.END, key)
